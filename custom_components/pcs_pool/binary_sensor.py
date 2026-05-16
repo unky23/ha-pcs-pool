@@ -15,7 +15,6 @@ from .const import DOMAIN
 @dataclass(frozen=True, kw_only=True)
 class PCSBinarySensorDescription(BinarySensorEntityDescription):
     value_fn: Callable[[dict[str, Any]], bool]
-    suggested_object_id: str
 
 
 def _bool(value: Any) -> bool:
@@ -30,8 +29,8 @@ def _bool(value: Any) -> bool:
 
 
 BINARY_SENSOR_DESCRIPTIONS: tuple[PCSBinarySensorDescription, ...] = (
-    PCSBinarySensorDescription(key="pump", name="Pompa", suggested_object_id="pcs_pool_pompa", device_class=BinarySensorDeviceClass.RUNNING, icon="mdi:pump", value_fn=lambda c: _bool(c.get("ms1"))),
-    PCSBinarySensorDescription(key="online", name="Online", suggested_object_id="pcs_pool_online", device_class=BinarySensorDeviceClass.CONNECTIVITY, icon="mdi:lan-connect", value_fn=lambda c: _bool(c.get("ka"))),
+    PCSBinarySensorDescription(key="pump", name="PCS Pool Pompa", device_class=BinarySensorDeviceClass.RUNNING, icon="mdi:pump", value_fn=lambda c: _bool(c.get("ms1"))),
+    PCSBinarySensorDescription(key="online", name="PCS Pool Online", device_class=BinarySensorDeviceClass.CONNECTIVITY, icon="mdi:lan-connect", value_fn=lambda c: _bool(c.get("ka"))),
 )
 
 
@@ -47,9 +46,8 @@ class PCSBinarySensor(CoordinatorEntity, BinarySensorEntity):
     def __init__(self, coordinator: DataUpdateCoordinator, entry: ConfigEntry, description: PCSBinarySensorDescription) -> None:
         super().__init__(coordinator)
         self.entity_description = description
-        self._attr_unique_id = f"{entry.entry_id}_{description.key}"
+        self._attr_unique_id = f"pcs_pool_{entry.entry_id}_{description.key}"
         self._attr_name = description.name
-        self._attr_suggested_object_id = description.suggested_object_id
 
     @property
     def device_info(self):
@@ -57,9 +55,9 @@ class PCSBinarySensor(CoordinatorEntity, BinarySensorEntity):
         controller_id = data.get("kid") or "pcs_pool_controller"
         return {
             "identifiers": {(DOMAIN, str(controller_id))},
-            "name": data.get("kn") or "PCS Pool Controller",
+            "name": "PCS Pool",
             "manufacturer": "PCS / PoolCS",
-            "model": "PCS API Controller",
+            "model": str(data.get("kn") or "PCS API Controller"),
             "sw_version": str(data.get("kv")) if data.get("kv") is not None else None,
             "suggested_area": data.get("kl"),
         }
