@@ -1,0 +1,78 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "PCS Pool",
+        "description": "Podaj dane logowania do portalu PCS.",
+        "data": {
+          "username": "Login",
+          "password": "Hasło",
+          "scan_interval": "Interwał odświeżania w sekundach"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Nieprawidłowy login lub hasło.",
+      "cannot_connect": "Nie udało się połączyć z PCS API.",
+      "unknown": "Nieznany błąd."
+    },
+    "abort": {
+      "already_configured": "Ten kontroler PCS jest już skonfigurowany."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opcje PCS Pool",
+        "data": {
+          "scan_interval": "Interwał odświeżania w sekundach"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "ph": {
+        "name": "pH"
+      },
+      "redox": {
+        "name": "Redox"
+      },
+      "chlorine": {
+        "name": "Chlor"
+      },
+      "chlorine_bound": {
+        "name": "Chlor związany"
+      },
+      "temperature": {
+        "name": "Temperatura"
+      },
+      "flow": {
+        "name": "Przepływ"
+      },
+      "salt": {
+        "name": "Sól"
+      },
+      "pump_mode": {
+        "name": "Tryb pompy"
+      },
+      "last_seen": {
+        "name": "Ostatni odczyt"
+      },
+      "controller_name": {
+        "name": "Kontroler"
+      },
+      "location": {
+        "name": "Lokalizacja"
+      }
+    },
+    "binary_sensor": {
+      "pump": {
+        "name": "Pompa"
+      },
+      "online": {
+        "name": "Online"
+      }
+    }
+  }
+}

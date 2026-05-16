@@ -1,0 +1,12 @@
+{
+  "domain": "pcs_pool",
+  "name": "PCS Pool",
+  "codeowners": [],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://serwispoolcs.pl/",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "",
+  "requirements": [],
+  "version": "0.1.0"
+}

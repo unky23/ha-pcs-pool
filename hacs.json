@@ -1,0 +1,9 @@
+{
+  "name": "PCS Pool",
+  "render_readme": true,
+  "domains": [
+    "pcs_pool"
+  ],
+  "iot_class": "cloud_polling",
+  "homeassistant": "2024.6.0"
+}
