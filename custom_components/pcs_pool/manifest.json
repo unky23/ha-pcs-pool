@@ -5,8 +5,9 @@
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://serwispoolcs.pl/",
+  "integration_type": "hub",
   "iot_class": "cloud_polling",
-  "issue_tracker": "",
+  "issue_tracker": "https://github.com/unky23/ha-pcs-pool/issues",
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

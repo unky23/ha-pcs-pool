@@ -34,7 +34,7 @@ def _pump_mode(controller: dict[str, Any]) -> str:
 SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     PCSSensorDescription(
         key="ph",
-        translation_key="ph",
+        name="pH",
         native_unit_of_measurement="pH",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:ph",
@@ -42,7 +42,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="redox",
-        translation_key="redox",
+        name="Redox",
         native_unit_of_measurement="mV",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:flash-triangle",
@@ -50,7 +50,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="chlorine",
-        translation_key="chlorine",
+        name="Chlor",
         native_unit_of_measurement="mg/L",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:chemical-weapon",
@@ -58,7 +58,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="chlorine_bound",
-        translation_key="chlorine_bound",
+        name="Chlor związany",
         native_unit_of_measurement="mg/L",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:chemical-weapon",
@@ -66,7 +66,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="temperature",
-        translation_key="temperature",
+        name="Temperatura",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
         device_class="temperature",
@@ -74,7 +74,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="flow",
-        translation_key="flow",
+        name="Przepływ",
         native_unit_of_measurement="L/min",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:waves-arrow-right",
@@ -82,7 +82,7 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="salt",
-        translation_key="salt",
+        name="Sól",
         native_unit_of_measurement="g/L",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:shaker-outline",
@@ -90,25 +90,25 @@ SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
     ),
     PCSSensorDescription(
         key="pump_mode",
-        translation_key="pump_mode",
+        name="Tryb pompy",
         icon="mdi:pump",
         value_fn=_pump_mode,
     ),
     PCSSensorDescription(
         key="last_seen",
-        translation_key="last_seen",
+        name="Ostatni odczyt",
         icon="mdi:clock-outline",
         value_fn=lambda c: c.get("kd"),
     ),
     PCSSensorDescription(
         key="controller_name",
-        translation_key="controller_name",
+        name="Kontroler",
         icon="mdi:chip",
         value_fn=lambda c: _clean(c.get("kn")),
     ),
     PCSSensorDescription(
         key="location",
-        translation_key="location",
+        name="Lokalizacja",
         icon="mdi:map-marker",
         value_fn=lambda c: _clean(c.get("kl")),
     ),

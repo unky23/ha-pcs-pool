@@ -35,14 +35,14 @@ def _bool(value: Any) -> bool:
 BINARY_SENSOR_DESCRIPTIONS: tuple[PCSBinarySensorDescription, ...] = (
     PCSBinarySensorDescription(
         key="pump",
-        translation_key="pump",
+        name="Pompa",
         device_class=BinarySensorDeviceClass.RUNNING,
         icon="mdi:pump",
         value_fn=lambda c: _bool(c.get("ms1")),
     ),
     PCSBinarySensorDescription(
         key="online",
-        translation_key="online",
+        name="Online",
         device_class=BinarySensorDeviceClass.CONNECTIVITY,
         icon="mdi:lan-connect",
         value_fn=lambda c: _bool(c.get("ka")),
