@@ -15,7 +15,7 @@ from .const import DOMAIN
 
 @dataclass(frozen=True, kw_only=True)
 class PCSSensorDescription(SensorEntityDescription):
-    value_fn: Callable[[dict[str, Any]], Any
+    value_fn: Callable[[dict[str, Any]], Any]
     suggested_object_id: str
 
 
@@ -33,123 +33,30 @@ def _pump_mode(controller: dict[str, Any]) -> str:
 
 
 SENSOR_DESCRIPTIONS: tuple[PCSSensorDescription, ...] = (
-    PCSSensorDescription(
-        key="ph",
-        name="pH",
-        suggested_object_id="pcs_pool_ph",
-        native_unit_of_measurement="pH",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:ph",
-        value_fn=lambda c: c.get("p"),
-    ),
-    PCSSensorDescription(
-        key="redox",
-        name="Redox",
-        suggested_object_id="pcs_pool_redox",
-        native_unit_of_measurement="mV",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:flash-triangle",
-        value_fn=lambda c: c.get("r"),
-    ),
-    PCSSensorDescription(
-        key="chlorine",
-        name="Chlor",
-        suggested_object_id="pcs_pool_chlor",
-        native_unit_of_measurement="mg/L",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:chemical-weapon",
-        value_fn=lambda c: c.get("c"),
-    ),
-    PCSSensorDescription(
-        key="chlorine_bound",
-        name="Chlor związany",
-        suggested_object_id="pcs_pool_chlor_zwiazany",
-        native_unit_of_measurement="mg/L",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:chemical-weapon",
-        value_fn=lambda c: c.get("cz"),
-    ),
-    PCSSensorDescription(
-        key="temperature",
-        name="Temperatura",
-        suggested_object_id="pcs_pool_temperatura",
-        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
-        state_class=SensorStateClass.MEASUREMENT,
-        device_class="temperature",
-        value_fn=lambda c: c.get("te"),
-    ),
-    PCSSensorDescription(
-        key="flow",
-        name="Przepływ",
-        suggested_object_id="pcs_pool_przeplyw",
-        native_unit_of_measurement="L/min",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:waves-arrow-right",
-        value_fn=lambda c: c.get("mo1"),
-    ),
-    PCSSensorDescription(
-        key="salt",
-        name="Sól",
-        suggested_object_id="pcs_pool_sol",
-        native_unit_of_measurement="g/L",
-        state_class=SensorStateClass.MEASUREMENT,
-        icon="mdi:shaker-outline",
-        value_fn=lambda c: c.get("s"),
-    ),
-    PCSSensorDescription(
-        key="pump_mode",
-        name="Tryb pompy",
-        suggested_object_id="pcs_pool_tryb_pompy",
-        icon="mdi:pump",
-        value_fn=_pump_mode,
-    ),
-    PCSSensorDescription(
-        key="last_seen",
-        name="Ostatni odczyt",
-        suggested_object_id="pcs_pool_ostatni_odczyt",
-        icon="mdi:clock-outline",
-        value_fn=lambda c: c.get("kd"),
-    ),
-    PCSSensorDescription(
-        key="controller_name",
-        name="Kontroler",
-        suggested_object_id="pcs_pool_kontroler",
-        icon="mdi:chip",
-        value_fn=lambda c: _clean(c.get("kn")),
-    ),
-    PCSSensorDescription(
-        key="location",
-        name="Lokalizacja",
-        suggested_object_id="pcs_pool_lokalizacja",
-        icon="mdi:map-marker",
-        value_fn=lambda c: _clean(c.get("kl")),
-    ),
+    PCSSensorDescription(key="ph", name="pH", suggested_object_id="pcs_pool_ph", native_unit_of_measurement="pH", state_class=SensorStateClass.MEASUREMENT, icon="mdi:ph", value_fn=lambda c: c.get("p")),
+    PCSSensorDescription(key="redox", name="Redox", suggested_object_id="pcs_pool_redox", native_unit_of_measurement="mV", state_class=SensorStateClass.MEASUREMENT, icon="mdi:flash-triangle", value_fn=lambda c: c.get("r")),
+    PCSSensorDescription(key="chlorine", name="Chlor", suggested_object_id="pcs_pool_chlor", native_unit_of_measurement="mg/L", state_class=SensorStateClass.MEASUREMENT, icon="mdi:chemical-weapon", value_fn=lambda c: c.get("c")),
+    PCSSensorDescription(key="chlorine_bound", name="Chlor związany", suggested_object_id="pcs_pool_chlor_zwiazany", native_unit_of_measurement="mg/L", state_class=SensorStateClass.MEASUREMENT, icon="mdi:chemical-weapon", value_fn=lambda c: c.get("cz")),
+    PCSSensorDescription(key="temperature", name="Temperatura", suggested_object_id="pcs_pool_temperatura", native_unit_of_measurement=UnitOfTemperature.CELSIUS, state_class=SensorStateClass.MEASUREMENT, device_class="temperature", value_fn=lambda c: c.get("te")),
+    PCSSensorDescription(key="flow", name="Przepływ", suggested_object_id="pcs_pool_przeplyw", native_unit_of_measurement="L/min", state_class=SensorStateClass.MEASUREMENT, icon="mdi:waves-arrow-right", value_fn=lambda c: c.get("mo1")),
+    PCSSensorDescription(key="salt", name="Sól", suggested_object_id="pcs_pool_sol", native_unit_of_measurement="g/L", state_class=SensorStateClass.MEASUREMENT, icon="mdi:shaker-outline", value_fn=lambda c: c.get("s")),
+    PCSSensorDescription(key="pump_mode", name="Tryb pompy", suggested_object_id="pcs_pool_tryb_pompy", icon="mdi:pump", value_fn=_pump_mode),
+    PCSSensorDescription(key="last_seen", name="Ostatni odczyt", suggested_object_id="pcs_pool_ostatni_odczyt", icon="mdi:clock-outline", value_fn=lambda c: c.get("kd")),
+    PCSSensorDescription(key="controller_name", name="Kontroler", suggested_object_id="pcs_pool_kontroler", icon="mdi:chip", value_fn=lambda c: _clean(c.get("kn"))),
+    PCSSensorDescription(key="location", name="Lokalizacja", suggested_object_id="pcs_pool_lokalizacja", icon="mdi:map-marker", value_fn=lambda c: _clean(c.get("kl"))),
 )
 
 
-async def async_setup_entry(
-    hass: HomeAssistant,
-    entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
-) -> None:
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback) -> None:
     coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]["coordinator"]
-
-    async_add_entities(
-        PCSSensor(coordinator, entry, description)
-        for description in SENSOR_DESCRIPTIONS
-    )
+    async_add_entities(PCSSensor(coordinator, entry, description) for description in SENSOR_DESCRIPTIONS)
 
 
 class PCSSensor(CoordinatorEntity, SensorEntity):
     entity_description: PCSSensorDescription
     _attr_has_entity_name = False
 
-    def __init__(
-        self,
-        coordinator: DataUpdateCoordinator,
-        entry: ConfigEntry,
-        description: PCSSensorDescription,
-    ) -> None:
+    def __init__(self, coordinator: DataUpdateCoordinator, entry: ConfigEntry, description: PCSSensorDescription) -> None:
         super().__init__(coordinator)
         self.entity_description = description
         self._attr_unique_id = f"{entry.entry_id}_{description.key}"
@@ -160,7 +67,6 @@ class PCSSensor(CoordinatorEntity, SensorEntity):
     def device_info(self):
         data = self.coordinator.data or {}
         controller_id = data.get("kid") or "pcs_pool_controller"
-
         return {
             "identifiers": {(DOMAIN, str(controller_id))},
             "name": data.get("kn") or "PCS Pool Controller",
@@ -178,7 +84,6 @@ class PCSSensor(CoordinatorEntity, SensorEntity):
     @property
     def extra_state_attributes(self):
         data = self.coordinator.data or {}
-
         return {
             "controller_id": data.get("kid"),
             "controller_name": data.get("kn"),
